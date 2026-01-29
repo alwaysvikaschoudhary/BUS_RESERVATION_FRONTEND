@@ -1,6 +1,6 @@
 
 import 'bus_model.dart';
-import 'but_route.dart';
+import 'bus_route.dart';
 
 class BusSchedule {
   int? scheduleId;

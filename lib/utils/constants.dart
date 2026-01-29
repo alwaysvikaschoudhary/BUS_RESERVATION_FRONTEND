@@ -26,23 +26,13 @@ const String routeNameReservationPage = 'reservation';
 const cities = [
   'Mumbai',
   'Delhi',
-  'Bangalore',
-  'Hyderabad',
   'Chennai',
   'Kolkata',
   'Pune',
   'Jaipur',
-  'Lucknow',
-  'Ahmedabad',
-  'Chandigarh',
-  'Indore',
   'Surat',
-  'Vadodara',
-  'Visakhapatnam',
-  'Coimbatore',
   'Kochi',
   'kota',
-  'Guwahati',
   'Nagpur',
 ];
 

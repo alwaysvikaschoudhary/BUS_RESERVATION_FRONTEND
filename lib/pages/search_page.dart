@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_frontend/datasource/temp_db.dart';
+import 'package:flutter_frontend/providers/app_data_provider.dart';
 import 'package:flutter_frontend/utils/constants.dart';
 import 'package:flutter_frontend/utils/helper_functions.dart';
+import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -20,7 +21,8 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Search')
+        title: const Text('Search'),
+        backgroundColor: const Color.fromARGB(255, 239, 238, 238),
       ),
       body: Form(
         key: _formKey,
@@ -128,14 +130,15 @@ class _SearchPageState extends State<SearchPage> {
     }
 
     if(_formKey.currentState!.validate()) {
-      try {
-        final route = TempDB.tableRoute.firstWhere( (r) => 
-          r.cityFrom == fromCity && r.cityTo == toCity,
-        );
-        showMsg(context, route.routeName);
-      } catch (e) {
-        showMsg(context, 'No route found for selected cities');
-      }
+      Provider.of<AppDataProvider>(context, listen: false)
+        .getRouteByCityFromAndCityTo(fromCity!, toCity!)
+        .then((route){
+          Navigator.pushNamed(
+            context, 
+            routeNameSearchResultPage,
+            arguments: [route, getFormattedDate(departureDate!, pattern: 'EEE, dd MMM yyyy')]
+          );
+        });
     }
   }
 

@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_frontend/pages/search_page.dart';
+import 'package:flutter_frontend/pages/search_result_page.dart';
+import 'package:flutter_frontend/pages/seat_plan_page.dart';
+import 'package:flutter_frontend/providers/app_data_provider.dart';
+import 'package:flutter_frontend/utils/constants.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => AppDataProvider(),
+    child: const MyApp()
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -14,9 +22,15 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        primaryColor: Colors.lightGreen,
+        brightness: Brightness.light,
       ),
-      home: SearchPage(),
+      home: const SearchPage(),
+      routes: {
+        routeNameHome: (context) => const SearchPage(),
+        routeNameSearchResultPage: (context) => const SearchResultPage(),
+        routeNameSeatPlanPage: (context) => const SeatPlanPage(),
+      },
     );
   }
 }
